@@ -14,7 +14,7 @@
 
     <div class="output">
       <label>Output:</label>
-      <p [ngStyle]="styleObject">{{ name }}</p>
+      <p [ngStyle]="styleObject">{{ name | specialCharRemover }}</p>
     </div>
   </form>
 </div>

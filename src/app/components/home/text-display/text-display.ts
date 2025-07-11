@@ -3,9 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { TextService } from '../../../services/text.service';
 import { CommonModule } from '@angular/common';
 
+import { SpecialCharRemoverPipe } from '../../../pipes/special-char-remover-pipe';
+
 @Component({
   selector: 'app-text-display',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SpecialCharRemoverPipe],
   templateUrl: './text-display.html',
   styleUrl: './text-display.css',
 })

@@ -26,7 +26,7 @@ export class Formatting {
   }
 
   removeSpecialChar() {
-    this.textService.removeSpecialCharacters();
+    //this.textService.removeSpecialCharacters();
   }
 
   capitalizeWord() {
