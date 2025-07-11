@@ -1,0 +1,56 @@
+<form [formGroup]="dbForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Database Name:</label>
+    <input formControlName="dbName" />
+    <div *ngIf="dbForm.get('dbName')?.invalid && dbForm.get('dbName')?.touched">
+      <small *ngIf="dbForm.get('dbName')?.errors?.['required']"
+        >Required.</small
+      >
+      <small *ngIf="dbForm.get('dbName')?.errors?.['pattern']"
+        >No special characters allowed.</small
+      >
+    </div>
+  </div>
+
+  <div>
+    <label>Port Number:</label>
+    <input formControlName="port" />
+    <div *ngIf="dbForm.get('port')?.invalid && dbForm.get('port')?.touched">
+      <small *ngIf="dbForm.get('port')?.errors?.['required']">Required.</small>
+      <small *ngIf="dbForm.get('port')?.errors?.['pattern']"
+        >Max 5 digits allowed.</small
+      >
+    </div>
+  </div>
+
+  <div>
+    <label>Password:</label>
+    <input type="password" formControlName="password" />
+    <div
+      *ngIf="dbForm.get('password')?.invalid && dbForm.get('password')?.touched"
+    >
+      <small *ngIf="dbForm.get('password')?.errors?.['required']"
+        >Required.</small
+      >
+      <small *ngIf="dbForm.get('password')?.errors?.['minlength']"
+        >Min 6 characters.</small
+      >
+    </div>
+  </div>
+
+  <div>
+    <label>Database URL:</label>
+    <input formControlName="url" />
+    <div *ngIf="dbForm.get('url')?.invalid && dbForm.get('url')?.touched">
+      <small *ngIf="dbForm.get('url')?.errors?.['required']">Required.</small>
+      <small *ngIf="dbForm.get('url')?.errors?.['pattern']"
+        >Must start with http/https and not end with `/`.</small
+      >
+    </div>
+  </div>
+
+  <div class="form-buttons">
+    <button type="submit">Submit</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

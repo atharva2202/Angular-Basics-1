@@ -1,0 +1,9 @@
+<div *ngIf="entries.length > 0">
+  <h3>Database Entries:</h3>
+  <ul>
+    <li *ngFor="let entry of entries">
+      <strong>Name:</strong> {{ entry.dbName }} | <strong>Port:</strong> {{
+      entry.port }} | <strong>URL:</strong> {{ entry.url }}
+    </li>
+  </ul>
+</div>
