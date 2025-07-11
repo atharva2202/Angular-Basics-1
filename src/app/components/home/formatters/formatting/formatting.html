@@ -1,0 +1,30 @@
+<div class="formatting-container">
+  <!-- Unified row with 2 columns inside -->
+  <div class="button-grid">
+    <!-- Column 1 -->
+    <div class="col">
+      <button (click)="clearAll()">Clear All</button>
+      <button (click)="reverseAll()">Reverse All</button>
+      <button (click)="removeStyling()">Remove Styling</button>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="col">
+      <button (click)="removeWhiteSpace()">White-space Remove</button>
+      <button (click)="removeSpecialChar()">Remove Special Char</button>
+      <button (click)="capitalizeWord()">Capitalize Word</button>
+    </div>
+  </div>
+
+  <!-- Styling options row -->
+  <div class="style-row-wrapper">
+    <div class="style-row">
+      <button (click)="toggle('bold')">Bold</button>
+      <button (click)="toggle('italic')">Italic</button>
+      <button (click)="toggle('underline')">Underline</button>
+      <input type="color" (change)="changeColor($event)" title="Pick color" />
+      <button (click)="increaseFont()">A+</button>
+      <button (click)="decreaseFont()">A-</button>
+    </div>
+  </div>
+</div>

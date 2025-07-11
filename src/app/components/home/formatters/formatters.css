@@ -1,0 +1,8 @@
+.count {
+  padding-top: 10px;
+}
+
+.formatters {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
