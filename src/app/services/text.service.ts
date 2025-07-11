@@ -81,5 +81,14 @@ export class TextService {
   removeStyling() {
     const plain = this.getCurrentText();
     this.updateText(plain);
+
+    // Reset style to defaults
+    this.styleSubject.next({
+      bold: false,
+      italic: false,
+      underline: false,
+      color: '#000000',
+      fontSize: 16,
+    });
   }
 }

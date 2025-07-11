@@ -7,6 +7,9 @@
   <app-formatters></app-formatters>
 </div>
 
-<div class="entry-placeholder" *ngIf="view === 'entry'">
-  <p>Coming soon: Add Entry form!</p>
+<div class="entry-container" *ngIf="view === 'entry'">
+  <app-database-form
+    (dataSubmitted)="handleSubmitted($event)"
+  ></app-database-form>
+  <app-output [entries]="dbData"></app-output>
 </div>
