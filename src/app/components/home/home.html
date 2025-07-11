@@ -1,4 +1,12 @@
-<div class="home-container">
+<div class="home-welcome" *ngIf="view === 'hello'">
+  <h2>Welcome to the Text Formatting App</h2>
+</div>
+
+<div class="home-container" *ngIf="view === 'formatter'">
   <app-text-display></app-text-display>
-  <app-formatters> </app-formatters>
+  <app-formatters></app-formatters>
+</div>
+
+<div class="entry-placeholder" *ngIf="view === 'entry'">
+  <p>Coming soon: Add Entry form!</p>
 </div>

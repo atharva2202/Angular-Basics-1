@@ -2,4 +2,35 @@
   padding-top: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding-inline: 40px;
+  align-items: start;
+}
+
+/* Make formatter and text display sections look nice */
+app-formatters,
+app-text-display {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center hello view */
+.home-welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Placeholder styling */
+.entry-placeholder {
+  padding: 40px;
+  text-align: center;
+  font-size: 20px;
+  color: #555;
 }
