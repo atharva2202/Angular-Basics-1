@@ -57,7 +57,7 @@ export class TextService {
   }
 
   removeWhiteSpace() {
-    const cleaned = this.getCurrentText().replace(/\s+/g, ' ').trim();
+    const cleaned = this.getCurrentText().replace(/\s+/g, '').trim();
     this.updateText(cleaned);
   }
 
