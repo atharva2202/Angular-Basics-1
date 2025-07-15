@@ -4,8 +4,10 @@ import * as go from 'gojs';
 @Component({
   selector: 'app-gojs',
   standalone: true,
-  templateUrl: './gojs.html',
-  styleUrls: ['./gojs.css'],
+  template: `<div
+    #diagramDiv
+    style="width:100%; height:600px; border:1px solid lightgray;"
+  ></div>`,
 })
 export class Gojs implements OnInit {
   @ViewChild('diagramDiv', { static: true }) diagramDiv!: ElementRef;
@@ -15,19 +17,19 @@ export class Gojs implements OnInit {
 
     const diagram = $(go.Diagram, this.diagramDiv.nativeElement, {
       'undoManager.isEnabled': true,
-      layout: $(go.TreeLayout, { angle: 90 }),
+      layout: $(go.LayeredDigraphLayout, { direction: 90 }),
     });
 
-    // Custom node templates by category
+    // Define Node Templates
     diagram.nodeTemplateMap.add(
       'Root',
       $(
         go.Node,
         'Auto',
-        $(go.Shape, 'Rectangle', { fill: 'pink', strokeWidth: 0 }),
+        $(go.Shape, 'Rectangle', { fill: '#e60073', stroke: null }),
         $(
           go.TextBlock,
-          { margin: 8, font: 'bold 14px sans-serif' },
+          { margin: 8, font: 'bold 16px sans-serif', stroke: 'white' },
           new go.Binding('text', 'key')
         )
       )
@@ -38,10 +40,10 @@ export class Gojs implements OnInit {
       $(
         go.Node,
         'Auto',
-        $(go.Shape, 'Rectangle', { fill: 'yellow', strokeWidth: 0 }),
+        $(go.Shape, 'Rectangle', { fill: 'orange', stroke: null }),
         $(
           go.TextBlock,
-          { margin: 8, font: 'bold 14px sans-serif' },
+          { margin: 6, font: 'bold 14px sans-serif' },
           new go.Binding('text', 'key')
         )
       )
@@ -52,10 +54,15 @@ export class Gojs implements OnInit {
       $(
         go.Node,
         'Auto',
-        $(go.Shape, 'RoundedRectangle', { fill: 'lightgrey', strokeWidth: 0 }),
+        $(go.Shape, 'RoundedRectangle', {
+          fill: '#f2f2f2',
+          stroke: '#555',
+          strokeWidth: 1.5,
+          parameter1: 10,
+        }),
         $(
           go.TextBlock,
-          { margin: 8, font: 'bold 12px sans-serif' },
+          { margin: 6, font: '12px sans-serif' },
           new go.Binding('text', 'key')
         )
       )
@@ -66,22 +73,55 @@ export class Gojs implements OnInit {
       $(
         go.Node,
         'Auto',
-        $(go.Shape, 'Diamond', { fill: 'lightgrey', strokeWidth: 0 }),
+        $(go.Shape, 'Diamond', {
+          fill: '#f2f2f2',
+          stroke: '#555',
+          strokeWidth: 1.5,
+        }),
         $(
           go.TextBlock,
-          { margin: 8, font: 'bold 12px sans-serif' },
+          { margin: 6, font: '12px sans-serif' },
           new go.Binding('text', 'key')
         )
       )
     );
 
-    // Link templates
+    diagram.nodeTemplateMap.add(
+      'Ellipse',
+      $(
+        go.Node,
+        'Auto',
+        $(go.Shape, 'Ellipse', {
+          fill: '#fff',
+          stroke: 'black',
+          strokeWidth: 1.5,
+        }),
+        $(
+          go.TextBlock,
+          { margin: 6, font: '12px sans-serif' },
+          new go.Binding('text', 'key')
+        )
+      )
+    );
+
+    diagram.nodeTemplateMap.add(
+      'MergePoint',
+      $(
+        go.Node,
+        'Spot',
+        { width: 1, height: 1, selectable: false, pickable: false },
+        $(go.Shape, 'Circle', { fill: null, stroke: null }) // invisible node
+      )
+    );
+
+    // Link Templates
     diagram.linkTemplateMap.add(
       'pinkLink',
       $(
         go.Link,
-        { routing: go.Link.Orthogonal, corner: 5 },
-        $(go.Shape, { stroke: 'deeppink', strokeWidth: 2, toArrow: 'Standard' })
+        { routing: go.Link.AvoidsNodes, curve: go.Link.None, corner: 5 },
+        $(go.Shape, { stroke: '#e600e6', strokeWidth: 3 }),
+        $(go.Shape, { toArrow: 'Standard', stroke: '#e600e6', fill: '#e600e6' })
       )
     );
 
@@ -89,8 +129,9 @@ export class Gojs implements OnInit {
       'grayLink',
       $(
         go.Link,
-        { curve: go.Link.Bezier },
-        $(go.Shape, { stroke: 'gray', strokeWidth: 2, toArrow: 'Standard' })
+        { routing: go.Link.AvoidsNodes, curve: go.Link.Bezier },
+        $(go.Shape, { stroke: 'gray', strokeWidth: 2 }),
+        $(go.Shape, { toArrow: 'Standard', fill: 'gray' })
       )
     );
 
@@ -98,42 +139,50 @@ export class Gojs implements OnInit {
       'blueLink',
       $(
         go.Link,
-        { curve: go.Link.Bezier },
-        $(go.Shape, { stroke: 'blue', strokeWidth: 2, toArrow: 'Standard' })
+        { routing: go.Link.AvoidsNodes, curve: go.Link.Bezier },
+        $(go.Shape, { stroke: 'blue', strokeWidth: 3 }),
+        $(go.Shape, { toArrow: 'Standard', fill: 'blue' })
       )
     );
 
-    // Model data
+    diagram.linkTemplateMap.add(
+      'straightLink',
+      $(
+        go.Link,
+        { routing: go.Link.Normal, curve: go.Link.None },
+        $(go.Shape, { stroke: 'black', strokeWidth: 2 }),
+        $(go.Shape, { toArrow: 'Standard', fill: 'black' })
+      )
+    );
+
+    // Data Model
     diagram.model = new go.GraphLinksModel(
       [
         { key: 'Rubiscape', category: 'Root' },
+        { key: 'Rubiconnect', category: 'MainChild' },
         { key: 'Rubistudio', category: 'MainChild' },
         { key: 'Rubisight', category: 'MainChild' },
-        { key: 'Rubiconnect', category: 'MainChild' },
         { key: 'Workflows', category: 'RoundedChild' },
         { key: 'Workbook', category: 'RoundedChild' },
         { key: 'Dashboard', category: 'RoundedChild' },
         { key: 'Reusable Code', category: 'Diamond' },
-        { key: 'Models', category: 'RoundedChild' },
-
-        // Invisible join node to merge Workflows and Workbook
-        { key: 'JoinNode', category: 'Join' },
+        { key: 'Models', category: 'Ellipse' },
+        { key: 'Merge', category: 'MergePoint' }, // visible merge node
       ],
       [
+        { from: 'Rubiscape', to: 'Rubiconnect', category: 'pinkLink' },
         { from: 'Rubiscape', to: 'Rubistudio', category: 'pinkLink' },
         { from: 'Rubiscape', to: 'Rubisight', category: 'pinkLink' },
-        { from: 'Rubiscape', to: 'Rubiconnect', category: 'pinkLink' },
+
         { from: 'Rubistudio', to: 'Workflows', category: 'grayLink' },
         { from: 'Rubistudio', to: 'Workbook', category: 'grayLink' },
         { from: 'Rubisight', to: 'Dashboard', category: 'blueLink' },
         { from: 'Workbook', to: 'Reusable Code', category: 'grayLink' },
 
-        // Converging arrows to join node
-        { from: 'Workflows', to: 'JoinNode', category: 'straightLink' },
-        { from: 'Workbook', to: 'JoinNode', category: 'straightLink' },
-
-        // Final arrow to Models
-        { from: 'JoinNode', to: 'Models', category: 'straightLink' },
+        // Merge behavior
+        { from: 'Workflows', to: 'Merge', category: 'straightLink' },
+        { from: 'Workbook', to: 'Merge', category: 'straightLink' },
+        { from: 'Merge', to: 'Models', category: 'straightLink' },
       ]
     );
   }
