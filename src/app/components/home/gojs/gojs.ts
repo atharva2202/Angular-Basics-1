@@ -20,7 +20,7 @@ export class Gojs implements OnInit {
       layout: $(go.LayeredDigraphLayout, { direction: 90 }),
     });
 
-    // Define Node Templates
+  
     diagram.nodeTemplateMap.add(
       'Root',
       $(
@@ -129,7 +129,7 @@ export class Gojs implements OnInit {
       'grayLink',
       $(
         go.Link,
-        { routing: go.Link.AvoidsNodes, curve: go.Link.Bezier },
+        { routing: go.Link.AvoidsNodes, curve: go.Link.None },
         $(go.Shape, { stroke: 'gray', strokeWidth: 2 }),
         $(go.Shape, { toArrow: 'Standard', fill: 'gray' })
       )
@@ -139,7 +139,7 @@ export class Gojs implements OnInit {
       'blueLink',
       $(
         go.Link,
-        { routing: go.Link.AvoidsNodes, curve: go.Link.Bezier },
+        { routing: go.Link.AvoidsNodes, curve: go.Link.None },
         $(go.Shape, { stroke: 'blue', strokeWidth: 3 }),
         $(go.Shape, { toArrow: 'Standard', fill: 'blue' })
       )
@@ -167,7 +167,7 @@ export class Gojs implements OnInit {
         { key: 'Dashboard', category: 'RoundedChild' },
         { key: 'Reusable Code', category: 'Diamond' },
         { key: 'Models', category: 'Ellipse' },
-        { key: 'Merge', category: 'MergePoint' }, // visible merge node
+        //{ key: 'Merge', category: 'MergePoint' }, // visible merge node
       ],
       [
         { from: 'Rubiscape', to: 'Rubiconnect', category: 'pinkLink' },
@@ -180,9 +180,8 @@ export class Gojs implements OnInit {
         { from: 'Workbook', to: 'Reusable Code', category: 'grayLink' },
 
         // Merge behavior
-        { from: 'Workflows', to: 'Merge', category: 'straightLink' },
-        { from: 'Workbook', to: 'Merge', category: 'straightLink' },
-        { from: 'Merge', to: 'Models', category: 'straightLink' },
+        { from: 'Workflows', to: 'Models', category: 'straightLink' },
+  { from: 'Workbook', to: 'Models', category: 'straightLink' }
       ]
     );
   }

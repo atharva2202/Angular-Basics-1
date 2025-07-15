@@ -7,6 +7,16 @@
   border-radius: 8px;
   background-color: #fafafa;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;        /* ✅ Ensure padding doesn't increase width */
+  overflow-wrap: break-word;     /* ✅ Wrap long words */
+  word-break: break-word;        /* ✅ Break overly long strings */
+}
+
+input[type="text"],
+.output p {
+  max-width: 100%;               /* ✅ Prevent wide text from overflowing */
+  box-sizing: border-box;        /* ✅ Consistent width calculation */
+  width: 100%;
 }
 
 .form-group {
