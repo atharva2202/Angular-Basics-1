@@ -13,3 +13,7 @@
   ></app-database-form>
   <app-output [entries]="dbData"></app-output>
 </div>
+
+<div class="gojs-container" *ngIf="view === 'gojs'">
+  <app-gojs></app-gojs>
+</div>

@@ -3,7 +3,7 @@ import { TextDisplay } from './text-display/text-display';
 import { Formatters } from './formatters/formatters';
 import { SharedView } from '../../services/shared-view';
 import { CommonModule } from '@angular/common';
-
+import { Gojs } from '../../gojs/gojs';
 import { DatabaseFormComponent } from './form/form-input/form-input';
 import { Output } from './form/output/output';
 @Component({
@@ -14,6 +14,7 @@ import { Output } from './form/output/output';
     CommonModule,
     DatabaseFormComponent,
     Output,
+    Gojs,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',

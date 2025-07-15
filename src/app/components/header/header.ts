@@ -17,4 +17,7 @@ export class Header {
   loadEntryView() {
     this.sharedView.setView('entry');
   }
+  loadGojsView() {
+    this.sharedView.setView('gojs');
+  }
 }
